@@ -45,7 +45,7 @@ class FaintEvent(private val config: Configuration, private val server: Minecraf
 
             // Check if the Pokémon is a boss (if applicable). Love u Guitar pookie
             val nbt = pokemon.persistentData
-            val isBoss = nbt.getBoolean("boss")
+            val isBoss = nbt.getBoolean("boss") || nbt.contains("raid_catch") || (nbt.contains("raid_entity") && nbt.getBoolean("raid_entity"))
             if (isBoss) return@subscribe
 
             val aspects = AspectProvider.providers.flatMap { it.provide(pokemon) }
